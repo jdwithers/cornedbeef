@@ -38,14 +38,13 @@
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="shaTest.html">SHA Test</a></li>
+              <li><a href="#shaTest">SHA Test</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">About</a></li>
+                  <li><a href="#about">About</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#contact">Contact</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
@@ -59,8 +58,9 @@
 
       <!-- Begin page content -->
       <div class="container">
+	    <!-- Main Content -->
         <div class="page-header">
-          <h1>Corned Beef, a simple authentication service.</h1>
+          <a name="#"></a><h1>Corned Beef, a simple authentication service.</h1>
         </div>
         <p class="lead">Narrative of the Concept</p>
 		<p>Bob needs to send a document to Rita, but Rita needs a way to know that the document is authentic and hasn’t been manipulated/hacked/compromised in transit.</p>
@@ -70,28 +70,21 @@
 		<p>Corned Beef uses server-side authentication to verify Bob’s identity, then uses client-side code to generate a hash for the file.  The hash is stored at Corned Beef, along with some other information about the file, such as its name and when Bob certified the document.</p>
 		<p>Bob sends the document to Rita as he normally would any other document (attached to an email, on a flash drive, on a DVD, on a 3.25” floppy - you name it).  In addition, Bob gives Rita a link to a page at Corned Beef where she can verify the authenticity of Bob’s file.</p>
 		<p>Rita has the file on her local machine now, along with Bob’s instructions for verifying its authenticity.  Rita goes to Corned Beef, where client-side software generates a hash for the file.  Corned Beef tells Rita all the information she wants to know about the file, such as when Bob certified it, or if Bob has voided his certification (Bob may want to void the certification if he issues a new, revised version of the file).</p>
-		<p></p>
 		<p class="lead">Client-Side Programming</p>
 		<p>Point the browser to a file and generate a hash that can be uploaded.  If you generate the hash on the client side, you don’t have to worry about storing the file itself on the server, you just store the hash.</p>
-		<p></p>
 		<p class="lead">Server-Side</p>
 		<p>Create a database with the following components: login/email address/public keys, password/private keys, lists of hashes associated with a user</p>
 		<p>For each hash, a database entry should contain the date/time of certification, the file name, and the login/email address/public key that certified it.</p>
 		<p>Create a browser-based interface that allows account administration, checking of authenticity, and general FAQ/front end material about the service.</p>
-		<p></p>
 		<p class="lead">Ideas</p>
-		<p></p>
 		<p><a href="https://github.com/Caligatio/jsSHA">https://github.com/Caligatio/jsSHA</a></p>
 		<p><a href="http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf">http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf</a></p>
 		<p>Use HMAC for the checksums.  The hash will be based upon the file itself and the key will be the certifier’s password.  When someone verifies the authenticity of a document, they will give the public key and the hash and the server will use the private key to verify the authenticity.</p>
-		<p></p>
 		<p>A thought on client-side code: using open-source code to generate the hash on the client side may not be a great idea, because you’re exposing a lot of code to the users and potential hackers.  However, the real service that you’re providing is the cloud-based database containing public keys, private keys, hash records, etc.  It doesn’t really matter that the code for generating your hashes is out there like that.</p>
-		<p></p>
 		<p>Proving certifiers are who they say they are (a critical component to me if I’m the end user who’s trying to decide if a document is authentic):</p>
 		<p><a href="http://bits.blogs.nytimes.com/2009/05/19/a-service-to-prove-you-are-really-you/?_r=0">http://bits.blogs.nytimes.com/2009/05/19/a-service-to-prove-you-are-really-you/?_r=0</a></p>
 		<p><a href="http://www.equifax.com/technology/anakam/solutions/en_tas">http://www.equifax.com/technology/anakam/solutions/en_tas</a></p>
 		<p><a href="http://www.equifax.com/pdfs/corp/Authentication-1.pdf">http://www.equifax.com/pdfs/corp/Authentication-1.pdf</a></p>
-		<p></p>
 		<p class="lead">Possible Names</p>
 		<p>Authentifile</p>
 		<p>Authentiphile (google search thinks this has something to do with hipsters)</p>
@@ -101,19 +94,22 @@
 		<p>Verifile (all of these are too religiously charged) </p>
 		<p>Veriphile (veriphobia/veriphilia are associated with Catholics needing verification that God exists) </p>
 		<p>Veriphilia</p>
-		<p></p>
 		<p class="lead">Marketing Targets</p>
 		<p>Professional firms - anyone who uses a service to digitally sign documents.</p>
-        <p></p>
+        <!-- SHA Test Content -->
+        <div class="page-header">
+          <a name="shaTest"></a><h1>Let's test some SHA!</h1>
+        </div>
+        <p class="lead">Here's where you input the filename that you're trying to get a hash for:</p>
+		<p></p>
       </div>
-    </div>
-
-    <div id="footer">
-      <div class="container">
-        <p class="text-muted credit">Copyright Dan Withers, 2013.  All rights reserved.</p>
+    
+      <div id="footer">
+        <div class="container">
+          <p class="text-muted credit text-center">Copyright Dan Withers, 2013.  All rights reserved.</p>
+        </div>
       </div>
-    </div>
-
+	</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
