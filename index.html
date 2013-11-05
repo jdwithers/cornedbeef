@@ -17,10 +17,33 @@
 	<link href="cornedbeefstyle.css" rel="stylesheet">
 	
     <!-- Add jsSHA JavaScript file -->
-    <script type="text/javascript" src="/path/to/sha_dev.js"></script>
+    <script type="text/javascript" src="sha.js"></script>
+	<script type="text/javascript">
+		function calcHMAC() {
+			try {
+				var hmacText = document.getElementById("hmacInputText");
+				var hmacTextType = document.getElementById("hmacTextType");
+				var hmacKeyInput = document.getElementById("hmacInputKey");
+				var hmacKeyInputType = document.getElementById("hmacKeyType");
+				var hmacVariant = document.getElementById("hmacVariant");
+				var hmacOutputType = document.getElementById("hmacOutputType");
+				var hmacOutput = document.getElementById("hmacOutputText");
+				var hmacObj = new jsSHA(hmacText.value, hmacTextType.options[hmacTextType.selectedIndex].value);
+
+				hmacOutput.value = hmacObj.getHMAC(
+					hmacKeyInput.value,
+					hmacKeyInputType.options[hmacKeyInputType.selectedIndex].value,
+					hmacVariant.options[hmacVariant.selectedIndex].value,
+					hmacOutputType.options[hmacOutputType.selectedIndex].value
+				);
+			} catch(e) {
+				hmacOutput.value = e
+			}
+		}
+	</script>
   </head>
 
-  <body>
+  <body onload="calcHMAC()">
 
     <!-- Wrap all page content here -->
     <div id="wrap">
@@ -59,6 +82,7 @@
       <!-- Begin page content -->
       <div class="container">
 	    <!-- Main Content -->
+		<div class="bs-docs-section">
         <div class="page-header">
           <a name="#"></a><h1>Corned Beef, a simple authentication service.</h1>
         </div>
@@ -96,24 +120,83 @@
 		<p>Veriphilia</p>
 		<p class="lead">Marketing Targets</p>
 		<p>Professional firms - anyone who uses a service to digitally sign documents.</p>
+		</div>
+		
         <!-- SHA Test Content -->
-        <div class="page-header">
-          <a name="shaTest"></a><h1>Let's test some SHA!</h1>
-        </div>
-        <p class="lead">Here's where you input the filename that you're trying to get a hash for:</p>
-
+		<div class="bs-docs-section">
+          <div class="page-header">
+            <a name="shaTest"></a><h1>Let's test some SHA!</h1>
+          </div>
+		  <p class="lead">Here's where you input the filename that you're trying to get a hash for:</p>
+		  <form action="#" method="get">
+				<fieldset>
+					<legend>HMAC Demo</legend>
+					<p>
+						Simply insert your text to be hashed, text type, key, key type, the SHA variant you wish to use, and the output format.<br />
+						<span style="font-size: 12px">Note: You may have to scroll the output text for longer length hashes</span>
+					</p>
+					<div>
+						<label for="hmacInputText">Input Text:</label><input type="text" size="75" name="hmacInputText" id="hmacInputText" onkeyup="calcHMAC()" />
+					</div>
+					<div>
+						<label for="hmacTextType">Input Type:</label>
+						<select name="hmacTextType" id="hmacTextType" onchange="calcHMAC()">
+							<option value="B64">Base-64</option>
+							<option selected="selected">TEXT</option>
+							<option>HEX</option>
+						</select>
+					</div>
+					<div>
+						<label for="hmacInputKey">Key:</label><input type="text" size="75" name="hmacInputKey" id="hmacInputKey" onkeyup="calcHMAC()" />
+					</div>
+					<div>
+						<label for="hmacKeyType">Key Type:</label>
+						<select name="hmacKeyType" id="hmacKeyType" onchange="calcHMAC()">
+							<option value="B64">Base-64</option>
+							<option selected="selected">TEXT</option>
+							<option>HEX</option>
+						</select>
+					</div>
+					<div>
+						<label for="hmacVariant">SHA Variant:</label>
+						<select name="hmacVariant" id="hmacVariant" onchange="calcHMAC()">
+							<option>SHA-1</option>
+							<option>SHA-224</option>
+							<option>SHA-256</option>
+							<option>SHA-384</option>
+							<option>SHA-512</option>
+						</select>
+					</div>
+					<div>
+						<label for="hmacOutputType">Output Type:</label>
+						<select name="hmacOutputType" id="hmacOutputType" onchange="calcHMAC()">
+							<option value="B64">Base-64</option>
+							<option selected="selected">HEX</option>
+						</select>
+					</div>
+					<div>
+						<label for="hmacOutputText">Output Hash:</label>
+						<input type="text" size="75" name="hmacOutputText" id="hmacOutputText" style="background-color: #b1ceed" />
+					</div>
+				</fieldset>
+		  </form>
+		</div>
+		
         <!-- About Content -->
-        <div class="page-header">
-          <a name="about"></a><h1>About</h1>
-        </div>
-        <p class="lead">Here's where you describe yourself.</p>
-
+        <div class="bs-docs-section">
+		  <div class="page-header">
+            <a name="about"></a><h1>About</h1>
+          </div>
+          <p class="lead">Here's where you describe yourself.</p>
+		</div>
+		
         <!-- Contact Content -->
-        <div class="page-header">
-          <a name="contact"></a><h1>Contact</h1>
-        </div>
-        <p class="lead">Here's where you put the contact info.</p>
-
+		<div class="bs-docs-section">
+		  <div class="page-header">
+            <a name="contact"></a><h1>Contact</h1>
+          </div>
+          <p class="lead">Here's where you put the contact info.</p>
+		</div>
       </div>
     
       <div id="footer">
