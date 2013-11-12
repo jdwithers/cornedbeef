@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Corned Beef</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+	<link href="cornedbeefstyle.css" rel="stylesheet">
+	<script type="text/javascript" src="sha.js"></script>
+	<script type="text/javascript">
+	function handleFileSelect(evt) {
+		var files = evt.target.files; // FileList object
+
+		// files is a FileList of File objects. List some properties.
+		var output = [];
+		    for (var i = 0, f; f = files[i]; i++) {
+			output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+			f.size, ' bytes, last modified: ',
+			f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+			'</li>');
+			}
+		document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    }
+	<!-- Example from jsSHA: -->
+	function calcHMAC() {
+		try {
+			var hmacText = document.getElementById("hmacInputFile");
+			var hmacTextType = "B64";
+			var hmacKeyInput = document.getElementById("hmacInputKey");
+			var hmacKeyInputType = "TEXT";
+			var hmacVariant = "SHA-512";
+			var hmacOutputType = "HEX";
+			var hmacOutput = document.getElementById("hmacOutputText");
+			var hmacObj = new jsSHA(hmacText.value, hmacTextType.options[hmacTextType.selectedIndex].value);
+
+			hmacOutput.value = hmacObj.getHMAC(
+				hmacKeyInput.value,
+				hmacKeyInputType.options[hmacKeyInputType.selectedIndex].value,
+				hmacVariant.options[hmacVariant.selectedIndex].value,
+				hmacOutputType.options[hmacOutputType.selectedIndex].value
+			);
+		} catch(e) {
+			hmacOutput.value = e
+		}
+	}
+	</script>	
+</head>
+<body>
+	<form action="#" method="get">
+		<label for="hmacInputFile">Input File:</label><input type="file" id="hmacInputFile" name="hmacInputFile" onchange="calcHMAC()" />
+		<label for="hmacInputKey">Key:</label><input type="text" size="75" name="hmacInputKey" id="hmacInputKey" onkeyup="calcHMAC()" />
+		<label for="hmacOutputText">Output Hash:</label>
+		<input type="text" size="75" name="hmacOutputText" id="hmacOutputText" style="background-color: #b1ceed" />
+	</form>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="./js/js/bootstrap.min.js"></script>
+</body>
+</html>
